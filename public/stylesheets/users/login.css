@@ -1,0 +1,11 @@
+#user {
+  font-size: 135%;
+}
+
+#signUp {
+  color: white;
+}
+
+#signUp:hover {
+  text-decoration: none;
+}

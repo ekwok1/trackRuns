@@ -9,8 +9,8 @@ var express = require('express'),
     loginMiddleware = require('./middleware/loginHelper'),
     routeMiddleware = require('./middleware/routeHelper'),
     ensureLoggedIn = routeMiddleware.ensureLoggedIn,
-    preventLoginSignup = routeMiddleware.preventLoginSignup;
-    // db = require('./models');
+    preventLoginSignup = routeMiddleware.preventLoginSignup,
+    db = require('./models');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
@@ -33,6 +33,10 @@ app.get('/', function(req, res) {
 
 app.get('/signup', function(req, res) {
   res.render('users/signup');
+});
+
+app.get('/login', function(req, res) {
+  res.render('users/login');
 });
 
 // creating localhost
