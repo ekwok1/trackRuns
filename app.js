@@ -25,18 +25,37 @@ app.use(session({
 
 app.use(loginMiddleware);
 
-// USERS
+// ROOT
 
 app.get('/', function(req, res) {
-  res.render('root/index');
+  res.render('root/index', {req: req});
 });
 
-app.get('/signup', function(req, res) {
+app.get('/signup', preventLoginSignup, function(req, res) {
   res.render('users/signup');
 });
 
-app.get('/login', function(req, res) {
+app.get('/login', preventLoginSignup, function(req, res) {
   res.render('users/login');
+});
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+// USERS
+
+app.post('/signup', function(req,res){
+   db.User.create(req.body.user, function(err, user){
+    if (user) {
+      console.log(user);
+      req.login(user);
+      res.redirect('/');
+    } else {
+      console.log(err);
+    }
+  });
 });
 
 // creating localhost
