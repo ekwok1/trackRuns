@@ -5,7 +5,11 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     session = require("cookie-session"),
-    request = require('request');
+    request = require('request'),
+    loginMiddleware = require('./middleware/loginHelper'),
+    routeMiddleware = require('./middleware/routeHelper'),
+    ensureLoggedIn = routeMiddleware.ensureLoggedIn,
+    preventLoginSignup = routeMiddleware.preventLoginSignup;
     // db = require('./models');
 
 app.set('view engine', 'ejs');
@@ -19,14 +23,25 @@ app.use(session({
   name: "tsocookies"
 }));
 
+app.use(loginMiddleware);
+
 // USERS
 
 app.get('/', function(req, res) {
   res.render('root/index');
 });
 
+app.get('/signup', function(req, res) {
+  res.render('users/signup');
+});
+
 // creating localhost
 
 app.listen(3000, function() {
-  console.log("Server is listening on port 3000");
+  console.log("localhost ready");
 });
+
+
+
+
+

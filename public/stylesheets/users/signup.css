@@ -1,0 +1,11 @@
+#user {
+  font-size: 135%;
+}
+
+#logIn {
+  color: white;
+}
+
+#logIn:hover {
+  text-decoration: none;
+}
