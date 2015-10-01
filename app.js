@@ -15,12 +15,18 @@ app.use(methodOverride('_method'));
 
 app.use(session({
   maxAge: 3600000,
-  secret: '___',
+  secret: 'secret',
   name: "tsocookies"
 }));
 
+// USERS
+
+app.get('/', function(req, res) {
+  res.render('root/index');
+});
+
 // creating localhost
 
-app.listen(process.env.PORT || 3000, function() {
-  "Server is listening on port 3000";
+app.listen(3000, function() {
+  console.log("Server is listening on port 3000");
 });

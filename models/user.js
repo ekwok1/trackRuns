@@ -3,23 +3,22 @@ var SALT_WORK_FACTOR = 10;
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema ({
-                      username: {
-                        type: String,
-                        required: true,
-                        lowercase: true,
-                        unique: true
-                        },
-                      password: {type: String, required: true},
-                      avatar: String,
-                      runs: [{
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: "Run"
-                      }],
-                      playlists: [{
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: "Playlist"
-                      }]
-                    });
+  username: {
+    type: String,
+    required: true,
+    lowercase: true,
+    unique: true
+    },
+  password: {type: String, required: true},
+  runs: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Run"
+  }],
+  playlists: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Playlist"
+  }]
+});
 
 userSchema.pre('save', function(next) {
   var user = this;
