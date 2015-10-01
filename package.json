@@ -1,0 +1,28 @@
+{
+  "name": "track_runs",
+  "version": "1.0.0",
+  "description": "track your runs, share your running tracks, etc.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekwok1/trackRuns.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ekwok1/trackRuns/issues"
+  },
+  "homepage": "https://github.com/ekwok1/trackRuns#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cookie-session": "^1.2.0",
+    "dotenv": "^1.2.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "request": "^2.64.0"
+  }
+}
