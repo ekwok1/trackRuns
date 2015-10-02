@@ -9,12 +9,24 @@ var runSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  distance: {
+    type: String,
+    required: true
+  },
   timeMinutes: {
     type: Number,
     required: true
   },
   timeSeconds: {
-    type:Number,
+    type: Number,
+    required: true
+  },
+  averageMileMinute: {
+    type: Number,
+    required: true
+  },
+  averageMileSecond: {
+    type: Number,
     required: true
   },
   user: {

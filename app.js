@@ -93,33 +93,60 @@ app.get('/users/:id/runs/new', function(req, res) {
   });
 });
 
+function timeConverter(num){
+  var count = 0;
+  while (num > 1) {
+    num--;
+    count++;
+  }
+  return count;
+}
+
 app.post('/users/:id/runs', function(req,res) {
   db.User.findById(req.params.id, function(err, user){
-    db.Run.create(req.body.run, function(err, run){
-      if (err) {
-        console.log(err);
-        res.render('runs/new', {req:req, user:user, err:"Validation Error! Please fill out all fields."});
-      } else {
-        
-        // db.User.findById(req.params.id, function(err, user){
-        //   user.runs.push(run);
-        //   run.user = user.id;
-        //   run.save();
-        //   user.save();
-        //   res.redirect('/users/'+req.params.id);
-        // });
-      }
-    });
+    request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA',
+      function(error, response, body){
+        if (!error && response.statusCode === 200) {
+          var parsedBody = JSON.parse(body),
+              origin = parsedBody.routes[0].legs[0].start_address,
+              destination = parsedBody.routes[0].legs[0].end_address,
+              distance = parsedBody.routes[0].legs[0].distance.text,
+              timeMinutes = Number(req.body.timeMinutes),
+              timeSeconds = Number(req.body.timeSeconds),
+
+              numberDistance = Number(distance.split(' ')[0]),
+              totalTime = timeSeconds/60 + timeMinutes,
+              averageMile = totalTime/numberDistance,
+              averageMileMinute = timeConverter(averageMile),
+              averageMileSecond = parseInt((averageMile - averageMileMinute)*60);
+
+          db.Run.create({
+            origin: origin,
+            destination: destination,
+            distance: distance,
+            timeMinutes: timeMinutes,
+            timeSeconds: timeSeconds,
+            averageMileMinute: averageMileMinute,
+            averageMileSecond: averageMileSecond
+          }, function(err, run){
+            if (err) {
+              res.render('runs/new', {req:req, user:user, err:"Validation Error! Please fill out all fields."});
+            } else {
+              db.User.findById(req.params.id, function(err2, user2){
+                user2.runs.push(run);
+                run.user = user2.id;
+                run.save();
+                user2.save();
+                res.redirect('/users/'+req.params.id);
+              });
+            }
+          });
+        } else {
+          console.log(err);
+        }
+      });
   });
 });
-
-// request('https://maps.googleapis.com/maps/api/directions/json?origin=2820+Regent+St+Berkeley,CA&destination=2820+Regent+St+Berkeley,CA&waypoint=Sliver+Berkeley,CA&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA', function (error, response, body) {
-//   if (!error && response.statusCode == 200) {
-//     console.log(body); 
-//   } else {
-//     console.log("what");
-//   }
-// });
 
 // creating localhost
 
