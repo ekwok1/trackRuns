@@ -38,7 +38,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/signup', preventLoginSignup, function(req, res) {
-  res.render('users/signup');
+  res.render('users/signup', {err: null});
 });
 
 app.get('/login', preventLoginSignup, function(req, res) {
@@ -58,7 +58,11 @@ app.post('/signup', function(req,res){
       req.login(user);
       res.redirect('/');
     } else {
-      console.log(err);
+      if (err.name === 'ValidationError') {
+        res.render('users/signup', {err:"Validation Error! Please fill out all fields."});
+      } else {
+        res.render('users/signup', {err:err});
+      }   
     }
   });
 });
@@ -70,7 +74,6 @@ app.post("/login", function (req, res) {
       req.login(user);
       res.redirect("/");
     } else {
-      console.log(err);
       res.render('users/login');
     }
   });

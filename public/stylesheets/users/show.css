@@ -1,0 +1,38 @@
+/*profile*/
+#wholeContainer {
+  margin-top: 40px;
+}
+
+#avatarContainer, #nameContainer {
+  text-align: center;
+}
+
+#avatar {
+  width: 55%;
+}
+
+#name {
+  font-size: 300%;
+}
+
+#personal {
+  margin-top: 60px;
+  font-size: 175%;
+}
+
+#totalRuns {
+  margin-top: 15px;
+  font-size: 135%;
+}
+
+#fastestSplit {
+  margin-top: 10px;
+  font-size: 135%;
+}
+
+/*general*/
+.jumbotron {
+  margin-top: -21px;
+  height: 630px;
+  position: fixed;
+}
