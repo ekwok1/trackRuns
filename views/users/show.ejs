@@ -41,7 +41,7 @@
     </nav>
   </div>
 
-  <div class="col-sm-4 jumbotron">
+  <div class="col-sm-3 jumbotron">
     <div id="wholeContainer">
       <% if (!user.avatar) { %>
         <div id="avatarContainer">
@@ -62,6 +62,29 @@
         <div id="fastestSplit">Fastest Mile Split: N/A</div>
       </div>
     </div>
+  </div>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-9">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <th></th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Distance</th>
+        <th>Total Time</th>
+        <th>Mile Pace</th>
+      </thead>
+      <tbody>
+        <% if (runs) { %>
+          <% runs.forEach(function(runs){ %>
+            <tr>
+              <td>See Route</td>
+              <td><%= runs.origin %></td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
   </div>
 
 </body>

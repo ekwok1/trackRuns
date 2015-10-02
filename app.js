@@ -81,7 +81,11 @@ app.post("/login", function (req, res) {
 
 app.get('/users/:id', function(req, res) {
   db.User.findById(req.params.id, function(err, user){
-    res.render('users/show', {req:req, user:user});
+    db.Run.find({
+      _id: {$in: user.runs}
+    }, function(err2, runs){
+      res.render('users/show', {req:req, user:user, runs:runs});
+    });
   });
 });
 
@@ -103,7 +107,7 @@ function timeConverter(num){
 }
 
 app.post('/users/:id/runs', function(req,res) {
-  db.User.findById(req.params.id, function(err, user){
+  db.User.findById(req.params.id, function(err2, user2){
     request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA',
       function(error, response, body){
         if (!error && response.statusCode === 200) {
@@ -132,12 +136,21 @@ app.post('/users/:id/runs', function(req,res) {
             if (err) {
               res.render('runs/new', {req:req, user:user, err:"Validation Error! Please fill out all fields."});
             } else {
-              db.User.findById(req.params.id, function(err2, user2){
-                user2.runs.push(run);
-                run.user = user2.id;
+              db.User.findById(req.params.id, function(err, user){
+                user.runs.push(run);
+                run.user = user.id;
                 run.save();
-                user2.save();
-                res.redirect('/users/'+req.params.id);
+                user.save();
+                db.Run.find(
+                {
+                  _id: {$in: user.runs}
+                }, function(err3, runs){
+                  if (err3) {
+                    console.log('what');
+                  } else {
+                    res.render('users/show', {req:req, user:user, runs:runs});
+                  }
+                });
               });
             }
           });
