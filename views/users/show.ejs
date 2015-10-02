@@ -8,7 +8,7 @@
     
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/stylesheets/root/index.css">
+  <link rel="stylesheet" href="/stylesheets/root/show.css">
 </head>
 <body>
   <div id="navbar">
@@ -26,11 +26,7 @@
     
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <% if (!req.session.id) { %>
-              <li><a href="#">About <span class="sr-only">(current)</span></a></li>
-            <% } else { %>
-              <li><a href="/users/<%= user.id %>">Profile <span class="sr-only">(current)</span></a></li>
-            <% } %>
+              <li><a href="#">Add New Run <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if (!req.session.id) { %>
@@ -43,10 +39,6 @@
         </div>
       </div>
     </nav>
-  </div>
-  
-  <div id="indexImg">
-    <img src="/images/root.jpg" id="background">
   </div>
   
 </body>
