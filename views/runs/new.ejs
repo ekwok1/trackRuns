@@ -41,5 +41,47 @@
     </nav>
   </div>
   
+  <div class="container-fluid">
+    <div class="col-sm-6">
+      <form class="form-horizontal" action="/signup" method="POST">
+        <fieldset>
+          <legend>New Run</legend>
+          <div class="form-group">
+            <label for="run[origin]" class="col-lg-2 control-label">Ran from: </label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="run[origin]" id="inputOrigin" placeholder="Origin">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="run[destination]" class="col-lg-2 control-label">To: </label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="run[destination]" id="inputDestination" placeholder="Destination">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="run[timeMinutes]" class="col-lg-2 control-label">Minutes</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="run[timeMinutes]" id="inputMinutes" placeholder="Minutes">
+            </div>
+            <label for="run[timeSeconds]" class="col-lg-2 control-label">Seconds</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="run[timeSeconds]" id="inputSeconds" placeholder="Seconds">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button type="reset" class="btn btn-default">Reset</button>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+  </div>
+  
 </body>
 </html>
+
+
+
+
+
