@@ -217,6 +217,12 @@ app.put('/runs/:id', function(req, res) {
   });
 });
 
+app.delete('/runs/:id', function(req, res){
+  db.Run.findByIdAndRemove(req.params.id, function(err, runs){
+    res.redirect('/users/'+req.session.id);
+  });
+});
+
 // creating localhost
 
 app.listen(3000, function() {

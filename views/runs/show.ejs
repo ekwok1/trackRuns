@@ -5,6 +5,7 @@
     <title>Find a route using Geolocation and Google Maps API</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/runs/show.css">
       
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -90,7 +91,7 @@
       #map {
         width: 100%;
         height: 580px;
-        margin-top: 10px;
+        margin-top: -55px;
       }
     </style>
   </head>
@@ -126,7 +127,7 @@
         </nav>
       </div>
 
-      <div class="container-fluid">
+      <div class="container-fluid" id="form">
         <div class="col-sm-5">
           <form class="form-horizontal" id="calculate-route" name="calculate-route" action="#" method="get">
             <fieldset>
@@ -146,6 +147,10 @@
                 </div>
               </div>
             </fieldset>
+          </form>
+
+          <form action="/runs/<%= runs.id %>?_method=delete" method="POST">
+            <button id="delete" class="btn btn-default" type="submit">DELETE RUN</button>
           </form>
         </div>
 
