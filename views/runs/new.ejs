@@ -43,7 +43,7 @@
   
   <div class="container-fluid">
     <div class="col-sm-6">
-      <form class="form-horizontal" action="/signup" method="POST">
+      <form class="form-horizontal" action="/users/<%= user.id %>/runs" method="POST">
         <fieldset>
           <legend>New Run</legend>
           <div class="form-group">
@@ -76,8 +76,17 @@
           </div>
         </fieldset>
       </form>
+
+      <% if (err) { %>
+        <div class="alert alert-dismissible alert-danger" id="alert">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>Warning!</strong>
+          <%= err %>
+        </div>
+      <% } %>
+
+    </div>
   </div>
-  
 </body>
 </html>
 

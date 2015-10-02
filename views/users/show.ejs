@@ -26,7 +26,7 @@
     
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-              <li><a href="/runs/new">Add New Run <span class="sr-only">(current)</span></a></li>
+              <li><a href="/users/<%= user.id %>/runs/new">Add New Run <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if (!req.session.id) { %>
@@ -52,7 +52,7 @@
       <% } %>
 
       <div id="nameContainer">
-        <div id="name"><%= user.firstName%> <%= user.lastName %></div>
+        <div id="name"><%= user.firstName %> <%= user.lastName %></div>
       </div>
 
       <div id="personal">Personal Stats:</div>

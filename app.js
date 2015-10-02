@@ -87,9 +87,29 @@ app.get('/users/:id', function(req, res) {
 
 // RUNS
 
-app.get('/runs/new', function(req, res) {
-  db.User.findById(req.session.id, function(err, user){
-    res.render('runs/new', {req:req, user:user});
+app.get('/users/:id/runs/new', function(req, res) {
+  db.User.findById(req.params.id, function(err, user){
+    res.render('runs/new', {req:req, user:user, err:null});
+  });
+});
+
+app.post('/users/:id/runs', function(req,res) {
+  db.User.findById(req.params.id, function(err, user){
+    db.Run.create(req.body.run, function(err, run){
+      if (err) {
+        console.log(err);
+        res.render('runs/new', {req:req, user:user, err:"Validation Error! Please fill out all fields."});
+      } else {
+        
+        // db.User.findById(req.params.id, function(err, user){
+        //   user.runs.push(run);
+        //   run.user = user.id;
+        //   run.save();
+        //   user.save();
+        //   res.redirect('/users/'+req.params.id);
+        // });
+      }
+    });
   });
 });
 

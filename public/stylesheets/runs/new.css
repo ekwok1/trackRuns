@@ -1,3 +1,7 @@
 #inputMinutes, #inputSeconds {
-  width: 50%;
+  width: 20%;
+}
+
+#alert {
+  margin-top: 40px;
 }
