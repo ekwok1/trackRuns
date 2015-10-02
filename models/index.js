@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/track_runs");
+mongoose.connect("process.env.MONGOLAB_URI || mongodb://localhost/track_runs");
 
 module.exports.User = require("./user");
 module.exports.Run = require("./run");

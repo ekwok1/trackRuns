@@ -11,8 +11,7 @@ var express = require('express'),
     ensureLoggedIn = routeMiddleware.ensureLoggedIn,
     preventLoginSignup = routeMiddleware.preventLoginSignup,
     db = require('./models');
-
-require('dotenv').load();
+    require('dotenv').load();
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
@@ -44,7 +43,7 @@ app.get('/signup', preventLoginSignup, function(req, res) {
 });
 
 app.get('/login', preventLoginSignup, function(req, res) {
-  res.render('users/login', {err: null});;
+  res.render('users/login', {err: null});
 });
 
 app.get('/logout', function(req, res) {
@@ -62,6 +61,8 @@ app.post('/signup', function(req,res){
     } else {
       if (err.name === 'ValidationError') {
         res.render('users/signup', {err:"Validation Error! Please fill out all fields."});
+      } else if (err.code === 11000) {
+        res.render('users/signup', {err:"Duplicate login."});
       } else {
         res.render('users/signup', {err:err});
       }   
@@ -227,11 +228,4 @@ app.delete('/runs/:id', function(req, res){
 
 // creating localhost
 
-app.listen(3000, function() {
-  console.log("localhost ready");
-});
-
-
-
-
-
+app.listen(process.env.PORT || 3000);
