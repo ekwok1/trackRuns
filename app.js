@@ -85,6 +85,14 @@ app.get('/users/:id', function(req, res) {
   });
 });
 
+// RUNS
+
+app.get('/runs/new', function(req, res) {
+  db.User.findById(req.session.id, function(err, user){
+    res.render('runs/new', {req:req, user:user});
+  });
+});
+
 // request('https://maps.googleapis.com/maps/api/directions/json?origin=2820+Regent+St+Berkeley,CA&destination=2820+Regent+St+Berkeley,CA&waypoint=Sliver+Berkeley,CA&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA', function (error, response, body) {
 //   if (!error && response.statusCode == 200) {
 //     console.log(body); 

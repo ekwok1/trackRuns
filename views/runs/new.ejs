@@ -8,7 +8,7 @@
     
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/stylesheets/users/show.css">
+  <link rel="stylesheet" href="/stylesheets/runs/new.css">
 </head>
 <body>
   <div id="navbar">
@@ -26,7 +26,7 @@
     
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-              <li><a href="/runs/new">Add New Run <span class="sr-only">(current)</span></a></li>
+            <li><a href="/users/<%= user.id %>">Profile <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if (!req.session.id) { %>
@@ -40,29 +40,6 @@
       </div>
     </nav>
   </div>
-
-  <div class="col-sm-4 jumbotron">
-    <div id="wholeContainer">
-      <% if (!user.avatar) { %>
-        <div id="avatarContainer">
-          <img src="/images/generic_pic.jpg" id="avatar">
-        </div>
-      <% } else { %>
-        <img src="<%= user.avatar %>" id="avatar">
-      <% } %>
-
-      <div id="nameContainer">
-        <div id="name"><%= user.firstName%> <%= user.lastName %></div>
-      </div>
-
-      <div id="personal">Personal Stats:</div>
-
-      <div id="statsContainer">
-        <div id="totalRuns">Runs Recorded: <%= user.runs.length %></div>
-        <div id="fastestSplit">Fastest Mile Split: N/A</div>
-      </div>
-    </div>
-  </div>
-
+  
 </body>
 </html>
