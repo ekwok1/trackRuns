@@ -172,8 +172,8 @@ app.post('/users/:id/runs', function(req,res) {
 });
 
 app.get('/runs/:id', function(req, res) {
-  db.Run.findById(req.params.id, function(err, run){
-    res.render('runs/show', {req:req, run:run});
+  db.Run.findById(req.params.id, function(err, runs){
+    res.render('runs/show', {req:req, runs:runs});
   });
 });
 
