@@ -89,6 +89,16 @@ app.get('/users/:id', function(req, res) {
   });
 });
 
+app.get('/users/:id/runs', function(req, res) {
+  db.User.findById(req.params.id, function(err, user){
+    db.Run.find({
+      _id: {$in: user.runs}
+    }, function(err2, runs){
+      res.render('users/show', {req:req, user:user, runs:runs});
+    });
+  });
+});
+
 // RUNS
 
 app.get('/users/:id/runs/new', function(req, res) {
@@ -158,6 +168,12 @@ app.post('/users/:id/runs', function(req,res) {
           console.log(err);
         }
       });
+  });
+});
+
+app.get('/runs/:id', function(req, res) {
+  db.Run.findById(req.params.id, function(err, run){
+    res.render('runs/show', {req:req, run:run});
   });
 });
 

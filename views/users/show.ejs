@@ -58,8 +58,8 @@
       <div id="personal">Personal Stats:</div>
 
       <div id="statsContainer">
-        <div id="totalRuns">Runs Recorded: <%= user.runs.length %></div>
-        <div id="fastestSplit">Fastest Mile Split: N/A</div>
+        <div id="totalRuns">Runs Recorded: unimplementeds</div>
+        <div id="fastestSplit">Fastest Mile Split: unimplemented</div>
       </div>
     </div>
   </div>
@@ -78,8 +78,12 @@
         <% if (runs) { %>
           <% runs.forEach(function(runs){ %>
             <tr>
-              <td>See Route</td>
+              <td><a href="/runs/<%= runs.id %>" id="route">See Route</a></td>
               <td><%= runs.origin %></td>
+              <td><%= runs.destination %></td>
+              <td><%= runs.distance %></td>
+              <td><%= runs.timeMinutes %>:<% if (runs.timeSeconds < 10) { %>0<%= runs.timeSeconds %><% } else { %><%= runs.timeSeconds %><% } %></td>
+              <td><%= runs.averageMileMinute %>:<% if (runs.averageMileSecond < 10) { %>0<%= runs.averageMileSecond %><% } else { %><%= runs.averageMileSecond%><% } %></td>
             </tr>
           <% }) %>
         <% } %>
