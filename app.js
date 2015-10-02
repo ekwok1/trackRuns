@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 
 app.use(session({
   maxAge: 3600000,
-  secret: process.env.SESSION_SECRET,
+  secret: "idontwannatellyou",
   name: "tsocookies"
 }));
 
@@ -121,7 +121,7 @@ function timeConverter(num){
 
 app.post('/users/:id/runs', function(req,res) {
   db.User.findById(req.params.id, function(err2, user2){
-    request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key='+process.env.API_KEY,
+    request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA',
       function(error, response, body){
         if (!error && response.statusCode === 200) {
           var parsedBody = JSON.parse(body),
