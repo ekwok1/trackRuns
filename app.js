@@ -177,6 +177,12 @@ app.get('/runs/:id', function(req, res) {
   });
 });
 
+app.get('/runs/:id/edit', function(req, res) {
+  db.Run.findById(req.params.id, function(err, runs){
+    res.render('runs/edit', {req:req, runs:runs});
+  });
+});
+
 // creating localhost
 
 app.listen(3000, function() {

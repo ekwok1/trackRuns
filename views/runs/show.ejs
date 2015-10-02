@@ -28,7 +28,7 @@
         var directionsRequest = {
           origin: from,
           destination: to,
-          travelMode: google.maps.DirectionsTravelMode.DRIVING,
+          travelMode: google.maps.DirectionsTravelMode.WALKING,
           unitSystem: google.maps.UnitSystem.METRIC
         };
         directionsService.route(
@@ -110,7 +110,8 @@
         
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                  <li><a href="#">Edit Run <span class="sr-only">(current)</span></a></li>
+                <li><a href="/users/<%= req.session.id %>">Profile <span class="sr-only">(current)</span></a></li>
+                <li><a href="/runs/<%= runs.id %>/edit">Edit Run <span class="sr-only">(current)</span></a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <% if (!req.session.id) { %>
@@ -152,7 +153,7 @@
           <div id="map"></div>
           <p id="error"></p>
         </div>
-        
+
       </div>
 
 
