@@ -12,6 +12,8 @@ var express = require('express'),
     preventLoginSignup = routeMiddleware.preventLoginSignup,
     db = require('./models');
 
+require('dotenv').load();
+
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,7 +21,7 @@ app.use(methodOverride('_method'));
 
 app.use(session({
   maxAge: 3600000,
-  secret: 'secret',
+  secret: process.env.SESSION_SECRET,
   name: "tsocookies"
 }));
 
@@ -118,7 +120,7 @@ function timeConverter(num){
 
 app.post('/users/:id/runs', function(req,res) {
   db.User.findById(req.params.id, function(err2, user2){
-    request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA',
+    request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key='+process.env.API_KEY,
       function(error, response, body){
         if (!error && response.statusCode === 200) {
           var parsedBody = JSON.parse(body),
