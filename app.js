@@ -183,6 +183,40 @@ app.get('/runs/:id/edit', function(req, res) {
   });
 });
 
+app.put('/runs/:id', function(req, res) {
+  request('https://maps.googleapis.com/maps/api/directions/json?origin='+req.body.origin+'&destination='+req.body.destination+'&key=AIzaSyAZDX1Yddffxd3vbLp-bS7GkPjC-IUPFcA',
+    function(error, response, body){
+      if (!error && response.statusCode === 200) {
+        var parsedBody = JSON.parse(body),
+            origin = parsedBody.routes[0].legs[0].start_address,
+            destination = parsedBody.routes[0].legs[0].end_address,
+            distance = parsedBody.routes[0].legs[0].distance.text,
+            timeMinutes = Number(req.body.timeMinutes),
+            timeSeconds = Number(req.body.timeSeconds),
+
+            numberDistance = Number(distance.split(' ')[0]),
+            totalTime = timeSeconds/60 + timeMinutes,
+            averageMile = totalTime/numberDistance,
+            averageMileMinute = timeConverter(averageMile),
+            averageMileSecond = parseInt((averageMile - averageMileMinute)*60);
+
+        db.Run.findByIdAndUpdate(req.params.id, 
+        {
+          origin: origin,
+          destination: destination,
+          distance: distance,
+          timeMinutes: timeMinutes,
+          timeSeconds: timeSeconds,
+          averageMileMinute: averageMileMinute,
+          averageMileSecond: averageMileSecond
+        }, 
+        function(err, run){
+          res.redirect('/users/'+req.session.id);
+        });
+      }
+  });
+});
+
 // creating localhost
 
 app.listen(3000, function() {
