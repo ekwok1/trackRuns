@@ -31,10 +31,10 @@ app.use(loginMiddleware);
 app.get('/', function(req, res) {
   if (req.session.id) {
     db.User.findById(req.session.id, function(err, user){
-      res.render('root/index', {req: req, user: user});
+      res.render('root/index', {req: req, user:user});
     });
   } else {
-    res.render('root/index', {req: req, user: null});
+    res.render('root/index', {req:req, user:null});
   }
 });
 
@@ -228,4 +228,6 @@ app.delete('/runs/:id', function(req, res){
 
 // creating localhost
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, function(){
+  console.log('localhost ready');
+});
