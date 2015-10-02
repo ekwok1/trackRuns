@@ -42,7 +42,7 @@ app.get('/signup', preventLoginSignup, function(req, res) {
 });
 
 app.get('/login', preventLoginSignup, function(req, res) {
-  res.render('users/login');
+  res.render('users/login', {err: null});;
 });
 
 app.get('/logout', function(req, res) {
@@ -74,7 +74,7 @@ app.post("/login", function (req, res) {
       req.login(user);
       res.redirect("/");
     } else {
-      res.render('users/login');
+      res.render('users/login', {err:err});
     }
   });
 });
